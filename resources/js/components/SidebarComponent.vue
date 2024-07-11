@@ -7,6 +7,9 @@
         <li class="nav-item">
           <router-link class="nav-link " to="/addcategory">Product Category</router-link>
         </li>
+        <li class="nav-item">
+          <router-link class="nav-link " to="/user-management">User Management</router-link>
+        </li>
       </ul>
     </aside>
   </template>

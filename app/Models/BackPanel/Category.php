@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Exception;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Category extends Model
 {
@@ -15,6 +16,7 @@ class Category extends Model
         try {
             $dataArray = [
                 'name' => $post['name'],
+                'slug' => Str::slug($post['name']) . '-' . time(),
                 'order' => $post['order'],
             ];
 
@@ -31,6 +33,24 @@ class Category extends Model
             }
             return true;
         } catch (Exception $e) {
+            throw $e;
+        }
+    }
+
+    public static function deleteData($post){
+        try{
+            $updateArray = [
+                'status'=> 'N',
+                'updated_at' => Carbon::now(),
+            ];
+
+            if(!empty($post['id'])){
+                if(!Category::where('id',$post['id'])->update($updateArray)){
+                    throw new Exception('Could not update category', 1);
+                }
+            }
+            return true;
+        }catch(Exception $e){
             throw $e;
         }
     }

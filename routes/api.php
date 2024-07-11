@@ -22,6 +22,7 @@ Route::middleware(['auth.api'])->group(function () {
     Route::post('/resetpassword', [AuthController::class, 'resetPassword']);
     Route::post('/addcategory', [CategoryController::class, 'save']);
     Route::get('/getcategories', [CategoryController::class, 'list']);
+    Route::post('/deletecategory', [CategoryController::class, 'delete']);
     // Route::post('/updatepassword', [ProfileController::class, 'updatePassword']);
     // Route::post('/updateprofile', [ProfileController::class, 'updateProfile']);
     // Route::post('/emailverification', [OtpController::class, 'emailVerificationOtp']);
