@@ -7,20 +7,23 @@ import OTPVerify from './components/OTPVerify.vue';
 import ResetPassword from './components/ResetPassword.vue';
 import MainLayout from './components/MainLayout.vue';
 import ProductCategory from './components/ProductCategory.vue';
+import UserManagement from './components/User Mannagement/UserManagement.vue';
 
 
 
 const routes = [
   { path: '/', redirect: '/login' },
   { path: '/login', component: Login },
-  { path: '/verifyotp', component: OTPVerify }, // Add route for OTP verification
-  { path: '/resetpassword', component: ResetPassword },
+  { path: '/verifyotp', component: OTPVerify, meta: { requiresAuth: true }, }, // Add route for OTP verification
+  { path: '/resetpassword', component: ResetPassword, meta: { requiresAuth: true }, },
   {
     path: '/',
     component: MainLayout,
+    meta: { requiresAuth: true },
     children: [
-      { path: 'dashboard', component: Dashboard, meta: { requiresAuth: true } },
-      { path: 'addcategory', component: ProductCategory}
+      { path: 'dashboard', component: Dashboard, },
+      { path: 'addcategory', component: ProductCategory },
+      { path: 'user-management', component: UserManagement },
     ]
   },
   // { path: '/addcategory', component: ProductCategory},

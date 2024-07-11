@@ -47,6 +47,9 @@ class CategoryController extends Controller
             $post = $request->all();
             $type = 'success';
             $message = 'Category created successfully';
+            if (!empty($post['id'])) {
+                $message = 'Category updated successfully';
+            }
             $response = [];
 
             DB::beginTransaction();
@@ -56,6 +59,36 @@ class CategoryController extends Controller
             }
             DB::commit();
             $response['redirect_url'] = '/api/addcategory';
+        } catch (ValidationException $e) {
+            DB::rollBack();
+            $type = 'error';
+            $message = $e->getMessage();
+            $response = false;
+        } catch (Exception $e) {
+            DB::rollBack();
+            $type = 'error';
+            $message = 'Something Went Wrong';
+            $response = false;
+        }
+        return response()->json(['type' => $type, 'message' => $message, 'response' => $response]);
+    }
+
+    public function delete(Request $request)
+    {
+        // dd($request->all());
+        try {
+            $post = $request->all();
+            $type = 'success';
+            $message = 'Category deleted successfully';
+            $response = [];
+
+            DB::beginTransaction();
+            $result = Category::deleteData($post);
+            if(!$result){
+                throw new Exception('Could not delete category', 1);
+            }
+            DB::commit();
+            $response = true;
         } catch (ValidationException $e) {
             DB::rollBack();
             $type = 'error';

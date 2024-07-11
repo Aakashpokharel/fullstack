@@ -17,9 +17,9 @@ class UserTableSeeder extends Seeder
     {
         User::create([
             'name' => 'superadmin',
-            'email' => 'curiousbrowser0@gmail.com',
+            'email' => 'superadmin@gmail.com',
             'password' => bcrypt('password'),
-            // 'first_time_login' => Carbon::now(),
+            'first_time_login' => Carbon::now(),
             'api_token' => Str::random(64),
         ]);
     }

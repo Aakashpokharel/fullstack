@@ -66,7 +66,7 @@
   
           console.log('Reset password response:', response.data);
   
-          if (response.data.status === 'success') {
+          if (response.data.type === 'success') {
             this.showMessage(response.data.message, 'success');
             setTimeout(() => {
               this.$router.push('/login');
