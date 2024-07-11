@@ -10,11 +10,13 @@
                 <input type="text" class="form-control" id="categoryName" v-model="categoryName" />
                 <span class="text-danger" v-if="errors.categoryName">{{ errors.categoryName }}</span>
             </div>
+
             <div class="mb-3">
                 <label for="categoryOrder" class="form-label">Order</label>
                 <input type="number" class="form-control" id="categoryOrder" v-model="categoryOrder" />
                 <span class="text-danger" v-if="errors.categoryOrder">{{ errors.categoryOrder }}</span>
             </div>
+            
             <button type="submit" class="btn btn-primary">Add Category</button>
         </form>
         <hr>
